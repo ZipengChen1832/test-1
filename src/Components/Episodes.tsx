@@ -1,48 +1,39 @@
-'use client';
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from 'next/link';
-import { useEpisodesData } from "@/hooks";
-import Characters from "./Characters";
-import { Episode, EpisodesProps } from "../types";
+import { Episode } from "../types";
 import styles from "../styles/Episodes.module.css";
+import { useRouter } from "next/router";
 
-const Episodes = () => {
-    const { episodes, loading, error } = useEpisodesData();
-    const [selectedEpisode, setSelectedEpisode] = useState("");
-    // const [episodeName, setEpisodeName] = useState("");
-    const [episodeCharacters, setEpisodeCharacters] = useState<Array<string>>([]);
+export interface IEpisodesProps {
+    episodes: Episode[];
+    currEpisode: Episode;
+}
 
-    const onClicked = (name:string, characters:Array<string>) => {
-        if (name === selectedEpisode) {
-            setSelectedEpisode("");
-            // setEpisodeName("");
-            setEpisodeCharacters([]);
+export default function Episodes({ episodes, currEpisode }: IEpisodesProps) {
+
+    const router = useRouter();
+    function handleClick(episode:Episode){
+        if(episode.name === currEpisode.name){
+            router.push("/")
         } else {
-            setSelectedEpisode(name);
-            // setEpisodeName(name);
-            setEpisodeCharacters(characters);
+            router.push(`?eps=${episode.id}`)
         }
-    };
-
+    }
 
     return (
-                <div className={styles.episodesBar}>
-                    <h1 className={styles.episodeTitle}>Episodes</h1>
-                    <div className={styles.episodesList}>
-                        {/* <ul> */}
-                        {episodes.map((episode:Episode) => (
-                            // <li key={episode.id}>
-                            <Link className={`${styles.episode} ${
-                                episode.name === selectedEpisode ? styles.selectedEpisode : styles.unselectedEpisode
-                            }`} 
-                                href={`/episode/${episode.id}`}
-                                key={episode.id} onClick={() => onClicked(episode.name, episode.characters)}>{episode.name}</Link>
-                            // </li>
-                            )) 
-                        }
-                        {/* </ul> */}
-                    </div>
-                </div>
+        <div className={styles.episodesBar}>
+            <h1 className={styles.episodeTitle}>Episodes</h1>
+            <div className={styles.episodesList}>
+                {episodes.map((episode: Episode) => (
+                    <div className={`${styles.episode} ${episode.name === currEpisode.name ? styles.selectedEpisode : styles.unselectedEpisode
+                        }`}
+                        key={episode.id}
+                        onClick={()=>handleClick(episode)}
+                    >{episode.name}</div>
+                ))
+                }
+            </div>
+        </div>
     );
 };
-export default Episodes
+

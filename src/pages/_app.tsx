@@ -8,7 +8,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className={styles.container}>
       <h1 className={styles.title}>Rick and Morty Characters</h1>
       <div className={styles.row}>
-        <Episodes />
         <Component {...pageProps} />
       </div>
     </div>

@@ -6,8 +6,6 @@
 } */
 
 .title {
-  display: grid;
-  place-items: center;
   height: 3.75rem;
   font-size: 1.8rem;
   margin: 0.5rem;
@@ -34,10 +32,6 @@
   top: 0;
   /* overflow-y: hidden; */
 }
-
-/* .episodeTitle + .episodesList {
-  height: 100%;
-} */
 
 .episodesList {
   /* height: 90%; */

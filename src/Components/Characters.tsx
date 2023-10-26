@@ -1,24 +1,19 @@
-'use client';
 import React from "react";
-import { useCharactersData } from "@/hooks";
 import Card from "./Card"
-import { Character, CharactersProps } from "../types";
+import { Character } from "../types";
 import styles from "../styles/Characters.module.css";
 
-const Characters = ({selectedEpisode, episodeCharacters}: CharactersProps) => {
-    const { characters, loading, error } = useCharactersData(selectedEpisode, episodeCharacters); 
-    console.log(characters);
+export interface ICharactersProps {
+    characters: Character[]
+}
 
+const Characters = ({characters}:ICharactersProps) => {
     return (
         <div className={styles.container}>
-            {(selectedEpisode !== "") && 
-                <h1 className={styles.title}>{episodeCharacters.length} Characters in episode "{selectedEpisode}"</h1>
-            }
-
             <div className={styles.charactersContainer}>
-                {characters.map((character:Character, index:number) => (
+                {characters.map((character:Character) => (
                     <Card
-                        key={index}
+                        key={character.id}
                         character={character}>
                     </Card>
                 ))}
