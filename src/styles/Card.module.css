@@ -1,0 +1,23 @@
+.card {
+  /* flex: 1 1 200px; */
+  max-width: 200px;
+  position: relative;
+  max-width: 50ch;
+  align-items: center;
+  
+}
+
+.body {
+  max-width: 200px;
+  color:rgb(76, 76, 76);
+  text-align: center;
+}
+
+.image {
+  width: 100%;
+  max-width: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 2px 2px 40px hsl(248 15.7% 80% / .5);
+}
+  
